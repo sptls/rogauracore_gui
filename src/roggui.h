@@ -30,8 +30,8 @@ class RogGui
 		Gtk::RadioButton* radio_single_breathing;
 		Gtk::RadioButton* radio_single_colorcycle;
 		Gtk::RadioButton* radio_multi_static;
-
 		Gtk::RadioButton* radio_multi_breathing;
+
 		Gtk::ColorButton* colorbutton_color1;
 		Gtk::ColorButton* colorbutton_color2;
 		Gtk::ColorButton* colorbutton_color3;
@@ -41,6 +41,9 @@ class RogGui
 		Gtk::Scale* scale_brightness;
 
 		Gtk::Image* image_rog_logo;
+
+		std::string settings_path = "~/.config/rogauracore_gui/settings";
+		int selected_theme;
 	
 		//for tray icon
 		//Glib::RefPtr<Gtk::StatusIcon> statusicon_tray_icon;
@@ -49,6 +52,9 @@ class RogGui
 		~RogGui();
 		std::string GetRGB(std::string str);
 		void ChangeRog(int action_type = THEME_CHANGE);
+		bool CheckSettingsExists();
+		void LoadSettings();
+		void SaveSettings();
 };
 
 #endif

@@ -3,9 +3,13 @@
 #include <gtkmm.h>
 #include <iostream>
 #include <cstdlib>
+#include <fstream>
 
 RogGui::RogGui()
 {
+	settings_path = getenv("HOME");
+	settings_path += "/.config/rogauracore_gui/settings";
+	
 	builder = Gtk::Builder::create_from_resource("/gui/rog_gui.glade");
 
 	builder->get_widget("window_main", window_main);
@@ -35,6 +39,22 @@ RogGui::RogGui()
 
 	scale_speed->signal_value_changed().connect(sigc::bind(sigc::mem_fun(*this, &RogGui::ChangeRog), SPEED_CHANGE));
 	scale_brightness->signal_value_changed().connect(sigc::bind(sigc::mem_fun(*this, &RogGui::ChangeRog), BRIGHTNESS_CHANGE));
+
+	colorbutton_color1->signal_color_set().connect(sigc::bind(sigc::mem_fun(*this, &RogGui::ChangeRog), THEME_CHANGE));
+	colorbutton_color2->signal_color_set().connect(sigc::bind(sigc::mem_fun(*this, &RogGui::ChangeRog), THEME_CHANGE));
+	colorbutton_color3->signal_color_set().connect(sigc::bind(sigc::mem_fun(*this, &RogGui::ChangeRog), THEME_CHANGE));
+	colorbutton_color4->signal_color_set().connect(sigc::bind(sigc::mem_fun(*this, &RogGui::ChangeRog), THEME_CHANGE));
+
+	if(CheckSettingsExists())
+		LoadSettings();
+	else
+	{
+		std::string home_path = "mkdir ";
+		home_path += getenv("HOME");
+		home_path += "/.config/rogauracore_gui";
+		system(home_path.c_str());
+		SaveSettings();
+	}
 };
 
 
@@ -81,7 +101,7 @@ std::string RogGui::GetRGB(std::string str)
 void RogGui::ChangeRog(int action_type)
 {
 	std::string command = "rogauracore ";
-	if(action_type == THEME_CHANGE)
+	if(action_type == THEME_CHANGE || action_type == SPEED_CHANGE)
 	{
 		int option = 0;	
 		if(radio_single_static->get_active())
@@ -97,6 +117,7 @@ void RogGui::ChangeRog(int action_type)
 		
 		std::string tmp;
 		int speed = (int)scale_speed->get_value();
+		selected_theme = option;
 		switch(option)
 		{
 			case SINGLE_STATIC:
@@ -153,6 +174,7 @@ void RogGui::ChangeRog(int action_type)
 				break;
 		}
 		system(command.c_str());
+		SaveSettings();
 		return;
 	}
 
@@ -162,12 +184,75 @@ void RogGui::ChangeRog(int action_type)
 		int brightness = (int)scale_brightness->get_value();
 		command += std::to_string(brightness);
 		system(command.c_str());
+		SaveSettings();
 		return;
 	}
+};
 
-	if(action_type == SPEED_CHANGE)
+bool RogGui::CheckSettingsExists()
+{
+	std::ifstream file(settings_path);
+	return file.good();
+};
+
+void RogGui::LoadSettings()
+{
+	std::ifstream file(settings_path);
+	std::string tmp;
+
+	getline(file, tmp);
+	switch(atoi(tmp.c_str()))
 	{
-		
-		return;
+		case 0:
+			radio_single_static->set_active(true);
+			break;
+		case 1:
+			radio_single_breathing->set_active(true);
+			break;
+		case 2:
+			radio_single_colorcycle->set_active(true);
+			break;
+		case 3:
+			radio_multi_static->set_active(true);
+			break;
+		case 4:
+			radio_multi_breathing->set_active(true);
+			break;
 	}
+	getline(file, tmp);
+	scale_brightness->set_value(atoi(tmp.c_str()));
+
+	getline(file, tmp);
+	scale_speed->set_value(atoi(tmp.c_str()));
+
+	getline(file, tmp);
+	colorbutton_color1->set_rgba(Gdk::RGBA(tmp));
+	getline(file, tmp);
+	colorbutton_color2->set_rgba(Gdk::RGBA(tmp));
+	getline(file, tmp);
+	colorbutton_color3->set_rgba(Gdk::RGBA(tmp));
+	getline(file, tmp);
+	colorbutton_color4->set_rgba(Gdk::RGBA(tmp));
+
+	ChangeRog(THEME_CHANGE);
+};
+
+void RogGui::SaveSettings()
+{
+	std::ofstream file(settings_path);
+	file << selected_theme;
+	file << "\n";
+	file << scale_brightness->get_value();
+	file << "\n";
+	file << scale_speed->get_value();
+	file << "\n";
+	file << colorbutton_color1->get_rgba().to_string();
+	file << "\n";
+	file << colorbutton_color2->get_rgba().to_string();
+	file << "\n";
+	file << colorbutton_color3->get_rgba().to_string();
+	file << "\n";
+	file << colorbutton_color4->get_rgba().to_string();
+	file << "\n";
+	file.close();
 };
