@@ -2,5 +2,7 @@
 <gresources>
 	<gresource prefix="/gui">
 		<file preprocess="xml-stripblanks">rog_gui.glade</file>
+		<file>rog_logo.png</file>
+		<file>rog_logo_icon.png</file>
 	</gresource>
 </gresources>

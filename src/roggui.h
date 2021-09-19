@@ -40,6 +40,11 @@ class RogGui
 		Gtk::Scale* scale_speed;
 		Gtk::Scale* scale_brightness;
 
+		Gtk::Image* image_rog_logo;
+	
+		//for tray icon
+		//Glib::RefPtr<Gtk::StatusIcon> statusicon_tray_icon;
+
 		RogGui();
 		~RogGui();
 		std::string GetRGB(std::string str);

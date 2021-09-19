@@ -30,6 +30,8 @@
     <property name="border-width">5</property>
     <property name="title" translatable="yes">Rogauracore GUI</property>
     <property name="resizable">False</property>
+    <property name="window-position">mouse</property>
+    <property name="icon">rog_logo_icon.png</property>
     <child>
       <object class="GtkFixed">
         <property name="width-request">-1</property>
@@ -49,8 +51,8 @@
             <property name="group">radiobutton1</property>
           </object>
           <packing>
-            <property name="x">23</property>
-            <property name="y">85</property>
+            <property name="x">21</property>
+            <property name="y">92</property>
           </packing>
         </child>
         <child>
@@ -66,15 +68,15 @@
             <property name="group">radiobutton1</property>
           </object>
           <packing>
-            <property name="x">23</property>
-            <property name="y">111</property>
+            <property name="x">21</property>
+            <property name="y">126</property>
           </packing>
         </child>
         <child>
           <object class="GtkRadioButton" id="radio_single_colorcycle">
             <property name="label" translatable="yes">Single Color Cycle</property>
             <property name="width-request">208</property>
-            <property name="height-request">23</property>
+            <property name="height-request">26</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">False</property>
@@ -83,8 +85,8 @@
             <property name="group">radiobutton1</property>
           </object>
           <packing>
-            <property name="x">23</property>
-            <property name="y">136</property>
+            <property name="x">21</property>
+            <property name="y">157</property>
           </packing>
         </child>
         <child>
@@ -100,8 +102,8 @@
             <property name="group">radiobutton1</property>
           </object>
           <packing>
-            <property name="x">23</property>
-            <property name="y">161</property>
+            <property name="x">21</property>
+            <property name="y">194</property>
           </packing>
         </child>
         <child>
@@ -117,8 +119,8 @@
             <property name="group">radiobutton1</property>
           </object>
           <packing>
-            <property name="x">23</property>
-            <property name="y">184</property>
+            <property name="x">22</property>
+            <property name="y">228</property>
           </packing>
         </child>
         <child>
@@ -232,6 +234,19 @@
           <packing>
             <property name="x">173</property>
             <property name="y">489</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage" id="image_rog_logo">
+            <property name="width-request">250</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="icon-name">audio-x-generic</property>
+          </object>
+          <packing>
+            <property name="x">104</property>
+            <property name="y">8</property>
           </packing>
         </child>
       </object>

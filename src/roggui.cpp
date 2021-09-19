@@ -20,6 +20,9 @@ RogGui::RogGui()
 	builder->get_widget("colorbutton_color4", colorbutton_color4);
 	builder->get_widget("scale_speed", scale_speed);
 	builder->get_widget("scale_brightness", scale_brightness);
+	builder->get_widget("image_rog_logo", image_rog_logo);
+
+	image_rog_logo->set_from_resource("/gui/rog_logo.png");
 
 	scale_speed->set_value(1.0);
 
