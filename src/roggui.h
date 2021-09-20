@@ -45,9 +45,6 @@ class RogGui
 		std::string settings_path = "~/.config/rogauracore_gui/settings";
 		int selected_theme;
 	
-		//for tray icon
-		//Glib::RefPtr<Gtk::StatusIcon> statusicon_tray_icon;
-
 		RogGui();
 		~RogGui();
 		std::string GetRGB(std::string str);

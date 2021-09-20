@@ -203,19 +203,19 @@ void RogGui::LoadSettings()
 	getline(file, tmp);
 	switch(atoi(tmp.c_str()))
 	{
-		case 0:
+		case SINGLE_STATIC:
 			radio_single_static->set_active(true);
 			break;
-		case 1:
+		case SINGLE_BREATHING:
 			radio_single_breathing->set_active(true);
 			break;
-		case 2:
+		case SINGLE_COLORCYCLE:
 			radio_single_colorcycle->set_active(true);
 			break;
-		case 3:
+		case MULTI_STATIC:
 			radio_multi_static->set_active(true);
 			break;
-		case 4:
+		case MULTI_BREATHING:
 			radio_multi_breathing->set_active(true);
 			break;
 	}
