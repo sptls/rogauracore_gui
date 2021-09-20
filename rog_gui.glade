@@ -130,7 +130,7 @@
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
-            <property name="rgba">rgb(38,162,105)</property>
+            <property name="rgba">rgb(0,0,0)</property>
           </object>
           <packing>
             <property name="x">15</property>
