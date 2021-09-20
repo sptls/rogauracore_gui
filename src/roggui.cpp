@@ -235,6 +235,7 @@ void RogGui::LoadSettings()
 	colorbutton_color4->set_rgba(Gdk::RGBA(tmp));
 
 	ChangeRog(THEME_CHANGE);
+	ChangeRog(BRIGHTNESS_CHANGE);
 };
 
 void RogGui::SaveSettings()
