@@ -9,7 +9,7 @@ all:
 	@rm resource.cpp
 	@echo Done
 	@echo -n Compiling...
-	@${CXX} -o roggui ${CFLAGS} ${LIBS} main.cpp src/*.cpp
+	@${CXX} -p main.cpp src/*.cpp -o roggui ${CFLAGS} ${LIBS}
 	@echo Done
 install:
 	cp roggui /usr/local/bin	
